@@ -175,15 +175,15 @@ call s:h("Boolean", { "fg": s:dark_yellow }) " a boolean constant: TRUE, false
 call s:h("Float", { "fg": s:dark_yellow }) " a floating point constant: 2.3e10
 call s:h("Identifier", { "fg": s:red }) " any variable name
 call s:h("Function", { "fg": s:blue }) " function name (also: methods for classes)
-call s:h("Statement", { "fg": s:purple }) " any statement
-call s:h("Conditional", { "fg": s:purple }) " if, then, else, endif, switch, etc.
-call s:h("Repeat", { "fg": s:purple }) " for, do, while, etc.
-call s:h("Label", { "fg": s:purple }) " case, default, etc.
-call s:h("Operator", { "fg": s:purple }) " sizeof", "+", "*", etc.
+call s:h("Statement", { "fg": s:blue }) " any statement
+call s:h("Conditional", { "fg": s:blue, "cterm": "bold" }) " if, then, else, endif, switch, etc.
+call s:h("Repeat", { "fg": s:blue, "cterm": "bold" }) " for, do, while, etc.
+call s:h("Label", { "fg": s:blue, "cterm": "bold" }) " case, default, etc.
+call s:h("Operator", { "fg": s:blue }) " sizeof", "+", "*", etc.
 call s:h("Keyword", { "fg": s:red }) " any other keyword
-call s:h("Exception", { "fg": s:purple }) " try, catch, throw
+call s:h("Exception", { "fg": s:blue }) " try, catch, throw
 call s:h("PreProc", { "fg": s:yellow }) " generic Preprocessor
-call s:h("Include", { "fg": s:blue }) " preprocessor #include
+call s:h("Include", { "fg": s:purple }) " preprocessor #include
 call s:h("Define", { "fg": s:purple }) " preprocessor #define
 call s:h("Macro", { "fg": s:purple }) " same as Define
 call s:h("PreCondit", { "fg": s:yellow }) " preprocessor #if, #else, #endif, etc.

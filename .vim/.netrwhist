@@ -1,3 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/home/florent/.vim'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/florent/.i3'
+let g:netrw_dirhist_2='/home/florent/.config/gtk-3.0'
+let g:netrw_dirhist_3='/home/florent/.config/polybar'
+let g:netrw_dirhist_4='/home/florent/.config/ranger'
+let g:netrw_dirhist_5='/home/florent/.config'
+let g:netrw_dirhist_6='/home/florent/.config/polybar'
+let g:netrw_dirhist_7='/home/florent/.vim'
+let g:netrw_dirhist_8='/home/florent/.vim/colors'
