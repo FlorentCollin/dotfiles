@@ -2,44 +2,29 @@
 execute pathogen#infect()
 
 filetype plugin indent on
+filetype plugin on
 " Color scheme
 syntax on
 colorscheme onedark
 highlight Normal ctermbg=NONE guibg=NONE
 set termguicolors "true colors
+let g:go_higlight_types = 1
 
 " Word wrap
 :set wrap
 :set linebreak
 
 " copy and paste
-vnoremap <C-c> "+y
-map <C-v> "+p
+vnoremap <C-S-c> "+y
+map <C-S-v> "+p
 
 " Indent config
-set sts=4
-set ts=4
-set sw=4
+set sts=2
+set ts=2
+set sw=2
 
 " Relative line number
 set relativenumber
-" Airline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-" Navigation between buffers
-execute "set <M-1>=\e1"
-execute "set <M-2>=\e2"
-execute "set <M-3>=\e3"
-execute "set <M-4>=\e4"
-execute "set <M-5>=\e5"
-execute "set <M-6>=\e6"
-execute "set <M-d>=\ed"
-nnoremap <silent> <M-h> ":wincmd h" <CR>
-nnoremap <silent> <M-j> ":wincmd j" <CR>
-nnoremap <silent> <M-k> ":wincmd k" <CR>
-nnoremap <silent> <M-l> ":wincmd l" <CR>
-nnoremap <silent> <M-d> :bd<CR> "delete the current buffer
 
 " NERDTree keybind
 map <silent> <C-n> :NERDTreeFocus<CR>
@@ -59,4 +44,18 @@ endfun
 
 map <Leader>r :call RangerChooser()<CR>
 
+" Gopls autocompletion go
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+set autowrite
+let g:go_fmt_command='goimports'
 
+
+" Ultisnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" Vim-javascript
+let g:javascript_plugin_flow = 1

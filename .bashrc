@@ -145,3 +145,9 @@ export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1
 export PS1="\[\033[38;5;33m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] > \[$(tput sgr0)\]"
 alias rr=ranger
 
+# Vim editor for ranger
+export EDITOR=vim
+
+export eslint="./node_modules/.bin/eslint"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
