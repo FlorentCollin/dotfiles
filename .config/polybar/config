@@ -73,7 +73,7 @@ fixed-center = true
 line-size = 2
 ;line-color = #f00
 
-border-size = 0
+border-size = 6
 ;border-color = #00000000
 
 monitor = ${env:MONITOR}
