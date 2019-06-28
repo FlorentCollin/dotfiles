@@ -108,9 +108,9 @@ content = 
 content-padding = 2
 content-background = ${color.shade1}
 content-foreground = ${color.fg}
-click-left = "rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 14""
+click-left = "rofi -show run" 
 
-click-right = rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 14"
+click-right = "rofi -show run" 
 
 [module/i3]
 type = internal/i3
@@ -184,43 +184,6 @@ label-empty-foreground = ${color.fg}
 label-active-foreground = ${color.acolor}
 label-urgent-foreground = ${color.curgent}
 label-occupied-foreground = ${color.coccupied}
-
-[module/google]
-type = custom/text
-content = 
-content-padding = 2
-content-foreground = ${color.fg-alt}
-click-left = xdg-open https://www.google.com/ 
-
-[module/github]
-type = custom/text
-content = 
-content-padding = 2
-content-foreground = ${color.fg-alt}
-click-left = xdg-open https://www.github.com/ 
-
-[module/reddit]
-type = custom/text
-content = 
-content-padding = 2
-content-foreground = ${color.fg-alt}
-click-left = xdg-open https://www.reddit.com/
-
-[module/facebook]
-type = custom/text
-content = 
-content-padding = 2
-content-foreground = ${color.fg-alt}
-click-left = xdg-open https://www.facebook.com/
-
-[module/youtube]
-type = custom/text
-content = 
-content-padding = 2
-content-foreground = ${color.fg-alt}
-click-left = xdg-open https://www.youtube.com/
-
-;==========================================================
 
 [module/mpd]
 type = internal/mpd
@@ -334,5 +297,16 @@ content-background = ${color.shade2}
 content-foreground = ${color.fg}
 click-left = pmenu_1
 click-right = pmenu_1
+
+[module/cpu]
+type = internal/cpu
+label-background = ${color.shade5}
+
+interval = 2
+content-padding = 2
+label-padding = 2
+label = CPU %percentage%%
+
+click-left = "gnome-system-monitor"
 
 ;== EOF ========================================================

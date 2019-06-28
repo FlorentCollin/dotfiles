@@ -19,9 +19,12 @@ vnoremap <C-S-c> "+y
 map <C-S-v> "+p
 
 " Indent config
-set sts=2
-set ts=2
-set sw=2
+set sts=4
+set ts=4
+set sw=4
+autocmd FileType python set sw=4
+autocmd FileType python set ts=4
+autocmd FileType python set sts=4
 
 " Relative line number
 set relativenumber
@@ -59,3 +62,20 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Vim-javascript
 let g:javascript_plugin_flow = 1
+
+" YouCompleteMe settings
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
