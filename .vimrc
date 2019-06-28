@@ -5,7 +5,7 @@ filetype plugin indent on
 filetype plugin on
 " Color scheme
 syntax on
-colorscheme onedark
+colorscheme codedark
 highlight Normal ctermbg=NONE guibg=NONE
 set termguicolors "true colors
 let g:go_higlight_types = 1
