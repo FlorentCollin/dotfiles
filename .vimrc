@@ -18,6 +18,9 @@ let g:go_higlight_types = 1
 vnoremap <C-S-c> "+y
 map <C-S-v> "+p
 
+" Leader Key
+map <Space> <leader>
+
 " Indent config
 set sts=4
 set ts=4
@@ -26,11 +29,18 @@ autocmd FileType python set sw=4
 autocmd FileType python set ts=4
 autocmd FileType python set sts=4
 
+" Scroll faster with <C-e> and <C-y>
+nnoremap <C-e> 2<C-e>
+nnoremap <C-y> 2<C-y>
+
 " Relative line number
 set relativenumber
 
 " NERDTree keybind
-map <silent> <C-n> :NERDTreeFocus<CR>
+map <silent> <C-n> :NERDTreeToggle<CR>
+let NERDTreeMapActivateNode='l'
+" Close NERDTree when this is the only window left 
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Fuzzy Finder
 set rtp+=~/.fzf
@@ -47,13 +57,6 @@ endfun
 
 map <Leader>r :call RangerChooser()<CR>
 
-" Gopls autocompletion go
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-set autowrite
-let g:go_fmt_command='goimports'
-
-
 " Ultisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -62,13 +65,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Vim-javascript
 let g:javascript_plugin_flow = 1
-
-" YouCompleteMe settings
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-let g:ycm_complete_in_comments = 1 " Completion in comments
-let g:ycm_complete_in_strings = 1 " Completion in string
 
 " Syntastic settings
 set statusline+=%#warningmsg#
@@ -79,3 +75,4 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
