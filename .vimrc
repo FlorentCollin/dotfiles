@@ -1,123 +1,128 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Specify a directory for plugins
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here') " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plug 'tomtom/tcomment_vim' " Comment line with one shortcut
+Plug 'ctrlpvim/ctrlp.vim' " Fuzzy Finder in vim
+Plug 'scrooloose/nerdtree' " File tree 
+Plug 'vim-airline/vim-airline' " Status Bar 
+Plug 'vim-airline/vim-airline-themes' " Status Bar theme
+Plug 'sheerun/vim-polyglot' " Syntax highlighting for a lot of different languages
+Plug 'editorconfig/editorconfig-vim' " Config file for project
+Plug 'ervandew/supertab' " Tab completion
+Plug 'vim-syntastic/syntastic' " Syntax checking plugin
+Plug 'moll/vim-node' " Allow gf on node syntax
+" YouCompleteMe with AutoInstall
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-
-Plugin 'tpope/vim-fugitive'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'SirVer/ultisnips'
-Plugin 'fatih/vim-go'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'ervandew/supertab'
-Plugin 'tell-k/vim-autopep8'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+"  You will load your plugin here
+"  Make sure you use single quotes
+" Initialize plugin system
+call plug#end()
 
 " Color scheme
 syntax on
 colorscheme codedark
-highlight Normal ctermbg=NONE guibg=NONE
-set termguicolors "true colors
-let g:go_higlight_types = 1
+" BOLD
+hi Identifier cterm=bold
+hi Function cterm=bold
+hi Statement cterm=bold
+hi Conditional cterm=bold
+hi Keyword cterm=bold
+hi Repeat cterm=bold
+hi PreProc cterm=bold
+hi Include cterm=bold
+hi Define cterm=bold
+hi Macro cterm=bold
+hi PreCondit cterm=bold
+hi pythonStatement cterm=bold
+hi pythonExClass cterm=bold
+hi pythonNone cterm=bold
+hi pythonBoolean cterm=bold
+hi pythonTodo cterm=bold
+hi pythonClassVar cterm=bold
+hi pythonClassDef cterm=bold
 
-" Word wrap
-:set wrap
-:set linebreak
 
 " copy and paste
 vnoremap <C-S-c> "+y
 map <C-S-v> "+p
+
+" Relative line number
+set relativenumber
+
+" Enter = add one line 
+map <CR> o<Esc>
+
+" Save the file when you don't you are not allowed to write the file
+cmap w!! %!sudo tee > /dev/null %
 
 " Moving between windows
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" Leader Key
-map <Space> <leader>
-
-" Indent config
-set sts=4
-set ts=4
-set sw=4
-autocmd FileType python set sw=4
-autocmd FileType python set ts=4
-autocmd FileType python set sts=4
 
 " Scroll faster with <C-e> and <C-y>
 nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>
 
-" Relative line number
-set relativenumber
+" Map leader key to the spacebar
+map <Space> <leader>
 
-" NERDTree keybind
-map <silent> <C-n> :NERDTreeToggle<CR>
-let NERDTreeMapActivateNode='l'
-" Close NERDTree when this is the only window left 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Remap <Leader>// to comment and uncomment lines of code
+noremap <silent> <Leader>// :TComment<CR>
 
-" Fuzzy Finder
-set rtp+=~/.fzf
+" NERDTree keybinds
+nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 
-" Ranger in VIM
-fun! RangerChooser()
-  exec "silent !ranger --choosefile=/tmp/chosenfile " .           expand("%:p:h")
-  if filereadable('/tmp/chosenfile')
-    exec 'edit ' . system('cat /tmp/chosenfile')
-    call system('rm /tmp/chosenfile')
-  endif
-  redraw!
-endfun
+" Airline (powerline fonts)
+let g:airline_theme = 'deus'
+let g:airline_powerline_fonts = 1
+" Reduce the latency when changing from mode to another mode
+set ttimeoutlen=0
+" Remove vim mode information line
+set noshowmode
 
-map <Leader>r :call RangerChooser()<CR>
-
-" Ultisnips
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" Vim-javascript
-let g:javascript_plugin_flow = 1
-
-" Syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-let g:syntastic_loc_list_height = 5
-
-" SuperTab default completion type 
+" SuperTab default completion type
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+
+" Leader F is for file related mappîngs (open, browse...)
+nnoremap <silent> <Leader>f :CtrlP<CR>
+" nnoremap <silent> <Leader>fm :CtrlPMRU<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ctrl B for buffer related mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <Leader>bb :CtrlPBuffer<CR> " cycle between buffer
+nnoremap <silent> <Leader>bn :bn<CR> "create (N)ew buffer
+nnoremap <silent> <Leader>bd :bdelete<CR> "(D)elete the current buffer
+nnoremap <silent> <Leader>bu :bunload<CR> "(U)nload the current buffer
+nnoremap <silent> <Leader>bl :setnomodifiable<CR> " (L)ock the current buffer"
+
+" Syntastic config
+set statusline+=%#warningmsg#                                   "syntastic
+set statusline+=%{SyntasticStatuslineFlag()}                    "syntastic
+set statusline+=%*                                              "syntastic
+
+let g:syntastic_always_populate_loc_list = 1                    "syntastic
+let g:syntastic_auto_loc_list = 1                               "syntastic
+let g:syntastic_check_on_open = 0                               "syntastic
+let g:syntastic_check_on_wq = 0                                 "syntastic
+
+" Syntastic JavaScript config
+let g:syntastic_javascript_checkers = ['eslint']
+
+" Start autocompletion after 4 chars
+let g:ycm_min_num_of_chars_for_completion = 4
+let g:ycm_min_num_identifier_candidate_chars = 4
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+set splitbelow
+" Don't show YCM's preview window 
+" set completeopt-=preview
+" let g:ycm_add_preview_to_completeopt = 0
+
+" reloads .vimrc -- making all changes active
+map <silent> <Leader>v :source ~/.vimrc<CR>:PlugInstall<CR>:bdelete<CR>:exe ":echo 'vimrc reloaded'"<CR>
