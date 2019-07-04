@@ -10,6 +10,7 @@ Plug 'vim-airline/vim-airline-themes' " Status Bar theme
 Plug 'sheerun/vim-polyglot' " Syntax highlighting for a lot of different languages
 Plug 'editorconfig/editorconfig-vim' " Config file for project
 Plug 'ervandew/supertab' " Tab completion
+Plug 'easymotion/vim-easymotion' " Easy jump to part of a file 
 Plug 'vim-syntastic/syntastic' " Syntax checking plugin
 Plug 'moll/vim-node' " Allow gf on node syntax
 " YouCompleteMe with AutoInstall
@@ -50,6 +51,7 @@ map <C-S-v> "+p
 
 " Relative line number
 set relativenumber
+set nu
 
 " Enter = add one line 
 map <CR> o<Esc>
@@ -64,17 +66,22 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Scroll faster with <C-e> and <C-y>
-nnoremap <C-e> 2<C-e>
-nnoremap <C-y> 2<C-y>
+nnoremap <C-j> 2<C-e>
+nnoremap <C-k> 2<C-y>
 
 " Map leader key to the spacebar
 map <Space> <leader>
+map \ <leader>
 
 " Remap <Leader>// to comment and uncomment lines of code
 noremap <silent> <Leader>// :TComment<CR>
 
 " NERDTree keybinds
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
+" Auto quit vim when NERDTree is the last window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Enter in a folder by pressing 'l' 
+let NERDTreeMapActivateNode = 'l'
 
 " Airline (powerline fonts)
 let g:airline_theme = 'deus'
@@ -91,6 +98,12 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " Leader F is for file related mappîngs (open, browse...)
 nnoremap <silent> <Leader>f :CtrlP<CR>
 " nnoremap <silent> <Leader>fm :CtrlPMRU<CR>
+let g:ctrlp_working_path_mode = 'ra'
+" Ignore some folders and files for CtrlP indexing
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\.git$\|\.yardoc\|node_modules\|log\|tmp$',
+  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctrl B for buffer related mappings
