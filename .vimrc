@@ -5,6 +5,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tomtom/tcomment_vim' " Comment line with one shortcut
 Plug 'ctrlpvim/ctrlp.vim' " Fuzzy Finder in vim
 Plug 'scrooloose/nerdtree' " File tree 
+Plug 'jiangmiao/auto-pairs' " Auto close ({[ ...
 Plug 'vim-airline/vim-airline' " Status Bar 
 Plug 'vim-airline/vim-airline-themes' " Status Bar theme
 Plug 'sheerun/vim-polyglot' " Syntax highlighting for a lot of different languages
@@ -12,9 +13,11 @@ Plug 'editorconfig/editorconfig-vim' " Config file for project
 Plug 'ervandew/supertab' " Tab completion
 Plug 'easymotion/vim-easymotion' " Easy jump to part of a file 
 Plug 'vim-syntastic/syntastic' " Syntax checking plugin
+Plug 'maksimr/vim-jsbeautify' " Format js code
 Plug 'moll/vim-node' " Allow gf on node syntax
 " YouCompleteMe with AutoInstall
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plug 'tomasiser/vim-code-dark'
 
 "  You will load your plugin here
 "  Make sure you use single quotes
@@ -85,11 +88,14 @@ let NERDTreeMapActivateNode = 'l'
 
 " Airline (powerline fonts)
 let g:airline_theme = 'deus'
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 " Reduce the latency when changing from mode to another mode
 set ttimeoutlen=0
 " Remove vim mode information line
 set noshowmode
+" Add tabline for buffers
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " SuperTab default completion type
 let g:SuperTabDefaultCompletionType = "<c-n>"
