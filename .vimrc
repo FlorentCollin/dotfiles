@@ -17,7 +17,8 @@ Plug 'maksimr/vim-jsbeautify' " Format js code
 Plug 'moll/vim-node' " Allow gf on node syntax
 " YouCompleteMe with AutoInstall
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-Plug 'tomasiser/vim-code-dark'
+Plug 'tomasiser/vim-code-dark' " Colorscheme
+Plug 'tpope/vim-fugitive' " Git integreation in vim
 
 "  You will load your plugin here
 "  Make sure you use single quotes
@@ -63,21 +64,25 @@ map <CR> o<Esc>
 cmap w!! %!sudo tee > /dev/null %
 
 " Moving between windows
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-j> <C-W><C-J>
+nnoremap <C-k> <C-W><C-K>
+nnoremap <C-l> <C-W><C-L>
+nnoremap <C-h> <C-W><C-H>
 
 " Scroll faster with <C-e> and <C-y>
-nnoremap <C-j> 2<C-e>
-nnoremap <C-k> 2<C-y>
+nnoremap <S-j> 2<C-e>
+nnoremap <S-k> 2<C-y>
 
 " Map leader key to the spacebar
 map <Space> <leader>
 map \ <leader>
 
+" Remap <Leader>j to format code with JsBeautify
+noremap <silent> <Leader>j :call JsBeautify()<CR>
 " Remap <Leader>// to comment and uncomment lines of code
 noremap <silent> <Leader>// :TComment<CR>
+" Remap <Leader>; to add a semicolon to the end of a line
+noremap <silent> <Leader>; A;<Esc> 
 
 " NERDTree keybinds
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
@@ -133,9 +138,9 @@ let g:syntastic_check_on_wq = 0                                 "syntastic
 " Syntastic JavaScript config
 let g:syntastic_javascript_checkers = ['eslint']
 
-" Start autocompletion after 4 chars
-let g:ycm_min_num_of_chars_for_completion = 4
-let g:ycm_min_num_identifier_candidate_chars = 4
+" Start autocompletion after 3 chars
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_min_num_identifier_candidate_chars = 3
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 set splitbelow
