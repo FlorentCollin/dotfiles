@@ -156,4 +156,4 @@ set -o vi
 
 alias vim=nvim
 
-
+alias osoc='cd ~/Projects/data-monitor/backend'
