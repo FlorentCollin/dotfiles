@@ -27,16 +27,23 @@ acolor = #FFFFFF
 curgent = #EF5350
 coccupied = #42A5F5
 
-shade1 = #01579B
-shade2 = #0277BD
-shade3 = #0288D1
-shade4 = #039BE5
-shade5 = #03A9F4
-shade6 = #29B6F6
-shade7 = #4FC3F7
-shade8 = #81D4FA
-ashade8 = #2C2C2C
+;shade1 = #01579B
+;shade2 = #0277BD
+;shade3 = #0288D1
+;shade4 = #039BE5
+;shade5 = #03A9F4
+;shade6 = #29B6F6
+;shade7 = #4FC3F7
+;shade8 = #81D4FA
+;ashade8 = #2C2C2C
 
+
+shade1 = #1C3B5A
+shade2 = #1F4464
+shade3 = #2B5F7C
+shade4 = #357D90
+shade5 = #3A889A
+shade6 = #449AA2
 ## Material Colors
 
 red = #e53935
@@ -71,11 +78,11 @@ height = 30
 bottom = true
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 5.0
 fixed-center = true
 
 line-size = 2
-;line-color = #f00
+line-color = #f00
 
 border-size = 4
 ;border-color = #00000000
@@ -139,17 +146,18 @@ format = <label-state> <label-mode>
 label-focused = %icon%
 label-focused-background = ${color.shade2}
 label-focused-padding = 2
+label-focused-underline = ${color.shade6}
 
 label-unfocused = %icon%
-label-unfocused-background = ${color.shade4}
+label-unfocused-background = ${color.shade3}
 label-unfocused-padding = 2
 
 label-visible = %icon%
-label-visible-background = ${color.shade4}
+label-visible-background = ${color.shade3}
 label-visible-padding = 2
 
 label-urgent = %icon%
-label-urgent-background = ${color.shade4}
+label-urgent-background = ${color.shade3}
 label-urgent-padding = 2
 
 [module/workspaces]
@@ -209,7 +217,7 @@ label-song-ellipsis = true
 [module/pkg]
 type = custom/script
 exec = updates.sh
-format-background = ${color.shade6}
+format-background = ${color.shade4}
 format-padding = 3
 tail = true
 click-left = pamac-manager
@@ -261,10 +269,10 @@ animation-charging-framerate = 750
 type = internal/alsa
 format-volume = <ramp-volume> <label-volume>
 format-volume-padding = 2
-format-volume-background = ${color.shade4}
+format-volume-background = ${color.shade3}
 label-volume = %percentage%%
 label-muted = "婢"
-label-muted-background = ${color.shade4}
+label-muted-background = ${color.shade3}
 label-muted-padding = 2
 
 ramp-volume-0 = 奄
@@ -278,7 +286,7 @@ ramp-volume-6 = 墳
 [module/network]
 type = custom/script
 exec = check-network
-format-background = ${color.shade3}
+format-background = ${color.shade2}
 format-padding = 3
 click-left = nm-connection-editor
 click-right = nm-connection-editor
@@ -289,8 +297,8 @@ type = internal/date
 interval = 30
 label =  %time%
 label-padding = 3
-label-background = ${color.shade2}
-time =  %I:%M %p
+label-background = ${color.shade1}
+time =  %I:%M %p
 time-alt =  %Y-%m-%d
 format-padding = 0
 
