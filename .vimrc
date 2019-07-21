@@ -73,6 +73,14 @@ nnoremap <C-h> <C-W><C-H>
 nnoremap <S-j> 2<C-e>
 nnoremap <S-k> 2<C-y>
 
+" Move line up or down
+nnoremap <A-j> :m .+1<cr>==
+nnoremap <A-k> :m .-2<cr>==
+inoremap <A-j> <esc>:m .+1<cr>==gi
+inoremap <A-k> <esc>:m .-2<cr>==gi
+vnoremap <A-j> :m '>+1<cr>gv=gv
+vnoremap <A-k> :m '<-2<cr>gv=gv
+
 " Map leader key to the spacebar
 map <Space> <leader>
 map \ <leader>
