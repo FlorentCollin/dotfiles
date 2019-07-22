@@ -48,10 +48,9 @@ hi pythonTodo cterm=bold
 hi pythonClassVar cterm=bold
 hi pythonClassDef cterm=bold
 
-
 " copy and paste
-vnoremap <C-S-c> "+y
-map <C-S-v> "+p
+vmap <C-c> "+c
+vmap <C-v> c<ESC>"+p
 
 " Relative line number
 set relativenumber
