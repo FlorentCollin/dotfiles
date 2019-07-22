@@ -272,7 +272,7 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym $mod+9 exec betterlockscreen -t "Don't touch to my machine" -l 
+bindsym $mod+9 exec betterlockscreen -t "Have a nice day !" -l 
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -446,4 +446,5 @@ exec --no-startup-id "setxkbmap us_qwerty-fr"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Startup
-exec --no-startup-id "feh --bg-scale ~/Pictures/solarized-wallpaper-manjaro.png"
+exec_always --no-startup-id "feh --bg-scale /home/florent/Pictures/wallpaper.png" 
+
