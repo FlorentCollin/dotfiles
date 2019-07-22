@@ -84,6 +84,8 @@ fixed-center = true
 line-size = 2
 line-color = #f00
 
+label-separator-padding = 2
+
 border-size = 4
 ;border-color = #00000000
 
@@ -217,7 +219,7 @@ label-song-ellipsis = true
 [module/pkg]
 type = custom/script
 exec = updates.sh
-format-background = ${color.shade4}
+format-background = ${color.shade1}
 format-padding = 3
 tail = true
 click-left = pamac-manager
@@ -226,17 +228,20 @@ click-right = pamac-manager
 type = internal/battery
 full-at = 99
 time-format = %H:%M
-battery = BAT1
+battery = BAT0
 adapter = AC
 format-charging = <animation-charging> <label-charging>
-format-charging-background = ${color.shade5}
+format-charging-background = ${color.shade1}
 format-charging-padding = 2
-label-charging = %percentage%%
+label-charging = " %percentage%%"
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-background = ${color.shade5}
+format-discharging-background = ${color.shade1}
 format-discharging-padding = 2
-label-discharging = %percentage%%
+label-discharging = " %percentage%%"
 format-full = <label-full>
+label-full = " %percentage%%"
+format-full-background = ${color.shade1}
+format-full-padding = 2
 
 format-full-prefix = " "
 ramp-capacity-0 = 
@@ -269,10 +274,10 @@ animation-charging-framerate = 750
 type = internal/alsa
 format-volume = <ramp-volume> <label-volume>
 format-volume-padding = 2
-format-volume-background = ${color.shade3}
-label-volume = %percentage%%
+format-volume-background = ${color.shade1}
+label-volume = " %percentage%%"
 label-muted = "婢"
-label-muted-background = ${color.shade3}
+label-muted-background = ${color.shade1}
 label-muted-padding = 2
 
 ramp-volume-0 = 奄
@@ -286,7 +291,7 @@ ramp-volume-6 = 墳
 [module/network]
 type = custom/script
 exec = check-network
-format-background = ${color.shade2}
+format-background = ${color.shade1}
 format-padding = 3
 click-left = nm-connection-editor
 click-right = nm-connection-editor
@@ -298,8 +303,8 @@ interval = 30
 label =  %time%
 label-padding = 3
 label-background = ${color.shade1}
-time =  %I:%M %p
-time-alt =  %Y-%m-%d
+time =   %I:%M  %p
+time-alt =    %Y-%m-%d
 format-padding = 0
 
 [module/powermenu]
