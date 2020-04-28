@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/florent/dev/learn/cmake/build/CMakeFiles'
+let g:netrw_dirhist_2='/home/florent/dev/learn/cmake/build/CMakeFiles/CMakeTmp'
+let g:netrw_dirhist_1='/home/florent/dev/learn/cmake/build/CMakeFiles'

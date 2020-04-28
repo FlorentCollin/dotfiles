@@ -1,2 +1,1 @@
-.vim/plugged/
-Sailec.*
+.config/nvim/plugged/*

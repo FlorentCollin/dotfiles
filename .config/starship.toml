@@ -1,0 +1,67 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]      # The name of the module we are configuring is "character"
+# symbol = "➜ "     # The "symbol" segment is being set to "➜"
+symbol = "λ"
+
+[kubernetes]
+disabled = true
+
+[hg_branch]
+disabled = true
+
+[package]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[elixir]
+disabled = true
+
+[elm]
+disabled = true
+
+[golang]
+disabled = true
+
+[haskell]
+disabled = true
+
+[java]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[php]
+disabled = true
+
+[ruby]
+disabled = true
+
+[python]
+disabled = true
+
+[rust]
+disabled = true
+
+[terraform]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[conda]
+disabled = true
+
+[aws]
+disabled = true
+
+[env_var]
+disabled = true
+
+[crystal]
+disabled = true
