@@ -4,18 +4,27 @@
 call plug#begin()
 
 Plug 'arcticicestudio/nord-vim'
+Plug 'christianchiarulli/onedark.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'Raimondi/delimitMate'
 Plug 'vim-airline/vim-airline'
-Plug 'preservim/nerdcommenter'
-Plug 'norcalli/nvim-colorizer.lua'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'Raimondi/delimitMate'
+Plug 'preservim/nerdcommenter'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'airblade/vim-rooter'
-Plug 'christianchiarulli/onedark.vim'
+
+" Markdown integration
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " Initalize plugin system
 call plug#end()
+
+" Load the vim package for debugging with gdb
+packadd! termdebug
 
 " ------------------ "
 " --> VIM Config <-- "
@@ -33,28 +42,40 @@ set shortmess+=F  " to get rid of the file name displayed in the command line ba
 syntax on
 set termguicolors
 set background=dark
-"colorscheme onedark
 colorscheme nord
+"colorscheme onedark
 
-" Leader key setting
-nnoremap <SPACE> <Nop>
-let mapleader=" "
+" set leader key
+let g:mapleader = "\<Space>"
 
 " Tab settings
 set sts=4
 set ts=4
 set sw=4
+set expandtab
 set smartindent
+
 " Better tabbing
 vnoremap < <gv
 vnoremap > >gv
 
-" Clear highlight when <esc> is pressed
-nnoremap <esc> :noh<return><esc>
-
 " Relative Number
 set number relativenumber
 set nu rnu
+
+" Clear highlight when <esc> is pressed
+nnoremap <esc> :noh<return><esc>
+
+" Terminal configuration
+au TermOpen * setlocal listchars= nonumber norelativenumber
+au TermOpen * startinsert
+au BufEnter,BufWinEnter,WinEnter term://* startinsert
+au BufLeave term://* stopinsert
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <M-[> <Esc>
+  tnoremap <C-v><Esc> <Esc>
+endif
 
 " Copy paste
 vmap <C-c> "+y
@@ -99,17 +120,15 @@ let g:delimitMate_expand_cr = 1
 " Vim-airline
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 0
-let b:airline_whitespace_disabled = 1
 let g:airline#extensions#tabline#enabled = 0
-
-" Vim-Which-Keys
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " Nvim colorizer lua
 lua require'colorizer'.setup()
 
+" Vim-Markdown
+let g:vim_markdown_math = 1
 
-" FZF configuration
 source $HOME/.config/nvim/plug-config/fzf.vim
-" Coc.nvim configuration
 source $HOME/.config/nvim/plug-config/coc.vim
+source $HOME/.config/nvim/plug-config/rnvimr.vim
+

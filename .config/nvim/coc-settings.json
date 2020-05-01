@@ -1,6 +1,8 @@
 {
 	"clangd.arguments": ["--compile-commands-dir=build"],
 
+	"python.jediEnabled": false,
+    "r.lsp.diagnostics": false,
 	// explorer
 	"explorer.width": 30,
 	"explorer.icon.enableNerdfont": true,
