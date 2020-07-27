@@ -2,7 +2,10 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-bindkey -e
+
+bindkey -v
+# Reduce "lag" between mode
+export KEYTIMEOUT=1
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/florent/.zshrc'
@@ -15,43 +18,63 @@ compinit
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 eval "$(starship init zsh)"
-alias vim=nvim
-main() {
-	cp ~/dev/competitive_programming/templates/io.cpp $1
-}
 
-run() {
-	if [ $# -eq 0 ]
-	  then
-		echo "Waiting for input..." && ./a.out
-      else
-		g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result $1 && echo "Waiting for input..." && ./a.out
-	fi
-}
-
-build() {
-	g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result $1
-}
-
-cpwd() {
-	pwd | xclip -sel clip
-}
-
-alias envim='vim ~/.config/nvim/init.vim'
-
-VISUAL=nvim; export VISUAL EDITOR=nvim; export EDITOR
 export PATH=$PATH:$HOME/.local/bin
 
+alias ls=exa
+
+alias vim=nvim
+alias envim='nvim ~/.config/nvim/init.vim'
+alias knvim='nvim ~/.config/kitty/kitty.conf'
+VISUAL=nvim; export VISUAL EDITOR=nvim; export EDITOR
+
+# FZF Default
+export FZF_DEFAULT_COMMAND='fd'
 # FZF Nord theme
+#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+    #--color=fg:#e5e9f0,bg:#2E3440,hl:#81a1c1
+    #--color=fg+:#e5e9f0,bg+:#2E3440,hl+:#81a1c1
+    #--color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
+    #--color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
+# FZF Atlas
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-    --color=fg:#e5e9f0,bg:#2E3440,hl:#81a1c1
-    --color=fg+:#e5e9f0,bg+:#2E3440,hl+:#81a1c1
-    --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
-    --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
+    --color=fg:#c0c0c0,bg:#212121,hl:#444444
+    --color=fg+:#c0c0c0,bg+:#212121,hl+:#444444'
+    #--color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
+    #--color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
+
+# FZF Alias and keybindings
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
+
 alias install="pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk \"{print \$2}\")' | xargs -ro sudo pacman -S"
+
 alias aur="yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro  yay -S"
 
+alias pypi="curl -s https://pypi.org/simple/ | xmllint --xpath '//a/text()' - | fzf -m --preview-window wrap --preview 'curl -s https://pypi.org/pypi/{1}/json | jq -r \".info.summary\"' | xargs -ro pip install"
+
+alias pypiuninstall="pip list | sed '1,2d' | fzf -m | xargs -ro pip uninstall"
+
 # Bat theme
-export BAT_THEME="Nord"
+export COLORTERM="truecolor"
+#export BAT_THEME="Nord"
+#export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# RMarkdown
+function knit() {
+    R -e "rmarkdown::render('$1')"
+}
+
+function pdf() {
+    evince $1 1> /dev/null 2> /dev/null &!
+}
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+
+alias bc="bc -l"
+alias gs="git status"
+alias run="./tests/Raytracer_tests --gtest_color=yes"
+
+export TERM=xterm-kitty
