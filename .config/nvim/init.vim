@@ -4,27 +4,37 @@
 call plug#begin()
 
 Plug 'arcticicestudio/nord-vim'
-Plug 'christianchiarulli/onedark.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-airline/vim-airline'
+Plug 'huyvohcmc/atlas.vim'
+Plug 'pgdouyon/vim-yin-yang'
+
+Plug 'davidosomething/vim-colors-meh'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 Plug 'Raimondi/delimitMate'
 Plug 'preservim/nerdcommenter'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'airblade/vim-rooter'
-
-" Markdown integration
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'voldikss/vim-floaterm'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'wellle/targets.vim'
+Plug 'cespare/vim-toml'
+Plug 'christoomey/vim-tmux-navigator'
 
-" Initalize plugin system
+" LSP
+Plug 'neovim/nvim-lsp'
+
+" Osoc
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'kevinoid/vim-jsonc'
+
 call plug#end()
-
-" Load the vim package for debugging with gdb
-packadd! termdebug
 
 " ------------------ "
 " --> VIM Config <-- "
@@ -33,20 +43,35 @@ packadd! termdebug
 " Global Settings
 set hidden
 set incsearch
+set inccommand=nosplit " Show modification feedback when using :substitute
 set ignorecase
+set completeopt=longest,menuone
+set signcolumn=yes
+
+" Set leader key
+let g:mapleader = "\<Space>"
+
+" Enable integrated highlight on yank
+autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("YankRegion", 1000)
 
 set noshowmode  " to get rid of thing like --INSERT--
 set shortmess+=F  " to get rid of the file name displayed in the command line bar
 
 " Colorscheme
 syntax on
-set termguicolors
 set background=dark
-colorscheme nord
-"colorscheme onedark
+colorscheme atlas
+set termguicolors
 
-" set leader key
-let g:mapleader = "\<Space>"
+" Relative Number
+set number relativenumber
+
+" Set fold method to manual
+set foldmethod=manual
+set foldlevel=99
+
+" Always show at least one line above/below the cursor.
+set scrolloff=1
 
 " Tab settings
 set sts=4
@@ -56,12 +81,13 @@ set expandtab
 set smartindent
 
 " Better tabbing
-vnoremap < <gv
-vnoremap > >gv
+vnoremap << <gv
+vnoremap >> >gv
 
-" Relative Number
-set number relativenumber
-set nu rnu
+" Language-aware completion
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-Space>
+
 
 " Clear highlight when <esc> is pressed
 nnoremap <esc> :noh<return><esc>
@@ -72,9 +98,7 @@ au TermOpen * startinsert
 au BufEnter,BufWinEnter,WinEnter term://* startinsert
 au BufLeave term://* stopinsert
 if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-  tnoremap <M-[> <Esc>
-  tnoremap <C-v><Esc> <Esc>
+  "tnoremap <Esc> <C-\><C-n>
 endif
 
 " Copy paste
@@ -86,24 +110,28 @@ imap <C-v> <C-r><C-o>+
 set splitbelow
 set splitright
 
+" Stop newline continuation on comments
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+
+" Activate the mouse usage (useful for presentation)
+set mouse=a
+
+" Currently tested settings
+set showbreak=↪
+
 " Keymapping for splits navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Use alt + hjkl to resize windows
+" Use Meta + hjkl to resize windows
 nnoremap <M-j>    :resize -2<CR>
 nnoremap <M-k>    :resize +2<CR>
 nnoremap <M-h>    :vertical resize -2<CR>
 nnoremap <M-l>    :vertical resize +2<CR>
 
-" Move selection up or down with J and K
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
 
-" Stop newline continuation on comments
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 
 " ------------------------------ "
 " --> Plugins Configuration <--  "
@@ -117,18 +145,29 @@ vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 let g:delimitMate_expand_space = 1
 let g:delimitMate_expand_cr = 1
 
-" Vim-airline
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#mixed_indent_algo = 0
-let g:airline#extensions#tabline#enabled = 0
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'atlas',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'cocstatus' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead',
+      \   'cocstatus': 'coc#status'
+      \ },
+      \   'separator': {
+      \     'left': '',
+      \     'right': ''
+      \ },
+      \ }
 
 " Nvim colorizer lua
 lua require'colorizer'.setup()
 
-" Vim-Markdown
-let g:vim_markdown_math = 1
-
 source $HOME/.config/nvim/plug-config/fzf.vim
-source $HOME/.config/nvim/plug-config/coc.vim
-source $HOME/.config/nvim/plug-config/rnvimr.vim
-
+source $HOME/.config/nvim/plug-config/floaterm.vim
+source $HOME/.config/nvim/plug-config/nvim-lsp.vim
