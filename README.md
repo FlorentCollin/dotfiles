@@ -11,7 +11,7 @@
 ```
 kitty 0.18.1 created by Kovid Goyal
 ```
- - Prompt: Startship
+ - Prompt: Starship
  - Editor: Neovim (latest build, need to be compiled by hand for the new nvim-lsp feature)
 Note: [vim-plug](https://github.com/junegunn/vim-plug) is the plugin manager used in my init.vim
 ```
