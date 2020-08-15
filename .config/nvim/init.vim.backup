@@ -3,34 +3,34 @@
 " --------------- "
 call plug#begin()
 
-" Colorschemes
 Plug 'arcticicestudio/nord-vim'
 Plug 'huyvohcmc/atlas.vim'
-Plug 'ayu-theme/ayu-vim'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'tomasiser/vim-code-dark'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-Plug 'chuling/ci_dark'
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'pgdouyon/vim-yin-yang'
 
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-unimpaired'
-Plug 'sheerun/vim-polyglot'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'davidosomething/vim-colors-meh'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'airblade/vim-rooter'
 Plug 'Raimondi/delimitMate'
 Plug 'preservim/nerdcommenter'
-Plug 'voldikss/vim-floaterm'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'airblade/vim-rooter'
 Plug 'godlygeek/tabular'
+Plug 'voldikss/vim-floaterm'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'wellle/targets.vim'
+Plug 'cespare/vim-toml'
+Plug 'christoomey/vim-tmux-navigator'
 
-" LSP
-Plug 'neovim/nvim-lsp'
+" Osoc
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'kevinoid/vim-jsonc'
 
 call plug#end()
 
@@ -43,22 +43,17 @@ set hidden
 set incsearch
 set inccommand=nosplit " Show modification feedback when using :substitute
 set ignorecase
-set completeopt=longest,menuone
-set signcolumn=yes
-set noshowmode  " to get rid of thing like --INSERT--
-set shortmess+=F  " to get rid of the file name displayed in the command line bar
 
-" Set leader key
+" set leader key
 let g:mapleader = "\<Space>"
 
-" Enable integrated highlight on yank
-autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("YankRegion", 1000)
-
+set noshowmode  " to get rid of thing like --INSERT--
+set shortmess+=F  " to get rid of the file name displayed in the command line bar
 
 " Colorscheme
 syntax on
 set background=dark
-colorscheme quantum
+colorscheme atlas
 set termguicolors
 
 " Relative Number
@@ -82,10 +77,6 @@ set smartindent
 vnoremap << <gv
 vnoremap >> >gv
 
-" Language-aware completion
-inoremap <C-Space> <C-x><C-o>
-inoremap <C-@> <C-Space>
-
 " Clear highlight when <esc> is pressed
 nnoremap <esc> :noh<return><esc>
 
@@ -107,15 +98,6 @@ imap <C-v> <C-r><C-o>+
 set splitbelow
 set splitright
 
-" Stop newline continuation on comments
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
-
-" Activate the mouse usage (useful for presentation)
-set mouse=a
-
-" Currently tested settings
-set showbreak=↪
-
 " Keymapping for splits navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -127,6 +109,14 @@ nnoremap <M-j>    :resize -2<CR>
 nnoremap <M-k>    :resize +2<CR>
 nnoremap <M-h>    :vertical resize -2<CR>
 nnoremap <M-l>    :vertical resize +2<CR>
+
+" Stop newline continuation on comments
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+
+set mouse=a
+
+" Currently tested settings
+set showbreak=↪
 
 
 " ------------------------------ "
@@ -143,7 +133,7 @@ let g:delimitMate_expand_cr = 1
 
 " Lightline
 let g:lightline = {
-      \ 'colorscheme': 'quantum',
+      \ 'colorscheme': 'atlas',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'cocstatus' ] ],
@@ -160,12 +150,12 @@ let g:lightline = {
       \     'right': ''
       \ },
       \ }
+ "let g:lightline.separator = { 'left': '', 'right': ''}
+ "let g:lightline.subseparator = { 'left': '', 'right': '' }
 
 " Nvim colorizer lua
 lua require'colorizer'.setup()
 
 source $HOME/.config/nvim/plug-config/fzf.vim
+source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/floaterm.vim
-source $HOME/.config/nvim/plug-config/nvim-lsp.vim
-
-nnoremap <Leader>` :Colors<CR>

@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/florent/.tmux'
+let g:netrw_dirhist_4='/home/florent/.config/nvim/plugged/atlas.vim/colors'
+let g:netrw_dirhist_3='/home/florent/.config/nvim/plugged/atlas.vim'
+let g:netrw_dirhist_2='/home/florent/.config/nvim/plugged'
+let g:netrw_dirhist_1='/home/florent/.config/kitty'
+let g:netrw_dirhist_0='/home/florent/dev/rdf/src'
+let g:netrw_dirhist_9='/home/florent/dev/poc-formulieren-harvesting/app/components'
+let g:netrw_dirhist_8='/home/florent/dev/poc-formulieren-harvesting/app'
+let g:netrw_dirhist_7='/home/florent/dev/notepod/src'
+let g:netrw_dirhist_6='/home/florent/dev/notepod/src/components'

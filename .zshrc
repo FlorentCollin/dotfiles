@@ -37,11 +37,15 @@ export FZF_DEFAULT_COMMAND='fd'
     #--color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
     #--color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
 # FZF Atlas
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-    --color=fg:#c0c0c0,bg:#212121,hl:#444444
-    --color=fg+:#c0c0c0,bg+:#212121,hl+:#444444'
+#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+    #--color=fg:#c0c0c0,bg:#212121,hl:#444444
+    #--color=fg+:#c0c0c0,bg+:#212121,hl+:#444444'
     #--color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
     #--color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
+# FZF Codedark
+#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+    #--color=fg:#c0c0c0,bg:#1E1E1E,hl:#444444
+    #--color=fg+:#c0c0c0,bg+:#1E1E1E,hl+:#444444'
 
 # FZF Alias and keybindings
 source /usr/share/fzf/completion.zsh
@@ -56,7 +60,7 @@ alias pypi="curl -s https://pypi.org/simple/ | xmllint --xpath '//a/text()' - | 
 alias pypiuninstall="pip list | sed '1,2d' | fzf -m | xargs -ro pip uninstall"
 
 # Bat theme
-export COLORTERM="truecolor"
+#export COLORTERM="truecolor"
 #export BAT_THEME="Nord"
 #export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
@@ -78,3 +82,17 @@ alias gs="git status"
 alias run="./tests/Raytracer_tests --gtest_color=yes"
 
 export TERM=xterm-kitty
+
+function d() {
+    dot -Tpng "$1" | feh -
+}
+
+function memory_leak() {
+    valgrind --leak-check=full \
+         --show-leak-kinds=all \
+         --track-origins=yes \
+         --verbose \
+         $1
+}
+
+alias summary="Rscript -e 'summary (as.numeric (readLines (\"stdin\")))'"

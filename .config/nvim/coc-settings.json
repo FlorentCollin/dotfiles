@@ -1,0 +1,42 @@
+{
+    "suggest.autoTrigger": "trigger",
+    "clangd.arguments": [
+        "--compile-commands-dir=build"
+    ],
+    "python.jediEnabled": false,
+    "r.lsp.diagnostics": false,
+    "explorer.width": 30,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": false,
+    "explorer.keyMappings": {
+        "<cr>": [
+            "expandable?",
+            "expand",
+            "open"
+        ],
+        "v": "open:vsplit"
+    },
+    "rust.wait_to_build": 200,
+    "languageserver": {
+        "haskell": {
+            "command": "hie-wrapper",
+            "args": [
+                "--lsp"
+            ],
+            "rootPatterns": [
+                "*.cabal",
+                "stack.yaml",
+                "cabal.project",
+                "package.yaml"
+            ],
+            "filetypes": [
+                "hs",
+                "lhs",
+                "haskell"
+            ],
+            "initializationOptions": {
+                "languageServerHaskell": {}
+            }
+        }
+    }
+}
